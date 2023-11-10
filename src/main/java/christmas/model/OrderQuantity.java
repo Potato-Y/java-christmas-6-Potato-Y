@@ -1,11 +1,12 @@
 package christmas.model;
 
+import static christmas.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
+import static christmas.model.OrderSheet.MINIMUM_ORDER_QUANTITY;
+
 import christmas.exception.InvalidOrderException;
 
 public class OrderQuantity {
 
-    private static final int MINIMUM_ORDER_QUANTITY = 1;
-    public static final int MAXIMUM_ORDER_QUANTITY = 20;
 
     private final int quantity;
 

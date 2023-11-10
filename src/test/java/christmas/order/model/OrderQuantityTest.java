@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderQuantityTest {
 
@@ -23,26 +25,11 @@ class OrderQuantityTest {
                 .isEqualTo(Integer.parseInt(quantity));
     }
 
-    @DisplayName("잘못된 숫자 입력은 오류를 반환한다: 0")
-    @Test
-    void createQuantityThrow1() {
-        assertThatThrownBy(() -> new OrderQuantity("0"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR_PREFACE);
-    }
-
-    @DisplayName("잘못된 숫자 입력은 오류를 반환한다: -10")
-    @Test
-    void createQuantityThrow2() {
-        assertThatThrownBy(() -> new OrderQuantity("-10"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR_PREFACE);
-    }
-
-    @DisplayName("잘못된 숫자 입력은 오류를 반환한다: 21")
-    @Test
-    void createQuantityThrow3() {
-        assertThatThrownBy(() -> new OrderQuantity("21"))
+    @DisplayName("잘못된 숫자 입력은 오류를 반환한다")
+    @ValueSource(strings = {"0", "-10", "21"})
+    @ParameterizedTest
+    void createQuantityThrow(String input) {
+        assertThatThrownBy(() -> new OrderQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_PREFACE);
     }

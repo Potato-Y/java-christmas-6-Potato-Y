@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderSheetTest {
 
@@ -23,20 +25,12 @@ class OrderSheetTest {
                 .isEqualTo(quantity);
     }
 
-    @DisplayName("최대 수량을 넘어서면 예외가 발생")
-    @Test
-    void quantityThrowForOver() {
+    @DisplayName("수량 범위를 넘어서면 예외가 발생")
+    @ValueSource(strings = {"21", "0", "-10", "100"})
+    @ParameterizedTest
+    void quantityThrow(String input) {
         assertThatThrownBy(() ->
-                new OrderQuantity("21"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR_PREFACE);
-    }
-
-    @DisplayName("수량이 1보다 적으면 예외가 발생")
-    @Test
-    void quantityThrowForDown() {
-        assertThatThrownBy(() ->
-                new OrderQuantity("0"))
+                new OrderQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_PREFACE);
     }

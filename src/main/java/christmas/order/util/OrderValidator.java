@@ -1,13 +1,13 @@
-package christmas.util;
+package christmas.order.util;
 
-import static christmas.model.MenuCategory.APPETIZER;
-import static christmas.model.MenuCategory.DESSERT;
-import static christmas.model.MenuCategory.MAIN_COURSE;
-import static christmas.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
+import static christmas.menu.model.MenuCategory.APPETIZER;
+import static christmas.menu.model.MenuCategory.DESSERT;
+import static christmas.menu.model.MenuCategory.MAIN_COURSE;
+import static christmas.order.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
 
 import christmas.exception.InvalidOrderException;
-import christmas.model.OrderQuantity;
-import christmas.model.RestaurantMenu;
+import christmas.menu.model.RestaurantMenu;
+import christmas.order.model.OrderQuantity;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;

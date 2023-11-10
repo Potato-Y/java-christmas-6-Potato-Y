@@ -1,11 +1,9 @@
-package christmas.util;
-
-import static christmas.model.Separator.COMMA;
-import static christmas.model.Separator.DASH;
+package christmas.order.util;
 
 import christmas.exception.InvalidOrderException;
-import christmas.model.OrderQuantity;
-import christmas.model.RestaurantMenu;
+import christmas.menu.model.RestaurantMenu;
+import christmas.order.model.OrderQuantity;
+import christmas.util.Separator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +18,10 @@ public class OrderParser {
     public static Map<RestaurantMenu, OrderQuantity> parse(String inOrder) {
         Map<RestaurantMenu, OrderQuantity> totalOrder = new HashMap<>();
 
-        String[] orders = inOrder.split(COMMA.toString()); // ,기준으로 자름. 메뉴명-수량
+        String[] orders = inOrder.split(Separator.COMMA.toString()); // ,기준으로 자름. 메뉴명-수량
         for (String order :
                 orders) {
-            String[] dashSeparation = order.split(DASH.toString()); // [메뉴명, 수량]
+            String[] dashSeparation = order.split(Separator.DASH.toString()); // [메뉴명, 수량]
             RestaurantMenu menu = RestaurantMenu.find(dashSeparation[0]); // 메뉴
             OrderQuantity quantity = new OrderQuantity(dashSeparation[1]); // 수량
 

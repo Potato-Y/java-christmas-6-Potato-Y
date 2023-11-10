@@ -1,5 +1,8 @@
 package christmas.model;
 
+import christmas.exception.InvalidOrderException;
+import java.util.Arrays;
+
 /**
  * 식당에서 판매하는 음식 분류, 음식 이름, 음식 가격을 나타냄.
  */
@@ -38,6 +41,13 @@ public enum RestaurantMenu {
 
     public int getPrice() {
         return price;
+    }
+
+    public static RestaurantMenu find(String name) {
+        return Arrays.stream(RestaurantMenu.values())
+                .filter(menu -> menu.name.equals(name))
+                .findAny()
+                .orElseThrow(InvalidOrderException::new);
     }
 
 }

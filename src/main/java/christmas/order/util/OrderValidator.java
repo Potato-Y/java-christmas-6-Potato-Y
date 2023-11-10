@@ -1,16 +1,13 @@
 package christmas.order.util;
 
-import static christmas.menu.model.MenuCategory.APPETIZER;
-import static christmas.menu.model.MenuCategory.DESSERT;
-import static christmas.menu.model.MenuCategory.MAIN_COURSE;
 import static christmas.order.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
 
 import christmas.exception.InvalidOrderException;
+import christmas.menu.model.MenuCategory;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderQuantity;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public class OrderValidator {
 
@@ -30,19 +27,12 @@ public class OrderValidator {
      * @param orders 주문 내용
      */
     private static void validateBeverage(Map<RestaurantMenu, OrderQuantity> orders) {
-        Set<RestaurantMenu> menus = orders.keySet();
+        boolean onlyBeverages = orders.keySet().stream()
+                .allMatch(menu -> menu.getCategory() == MenuCategory.BEVERAGE);
 
-        if (menus.contains(APPETIZER)) {
-            return;
+        if (onlyBeverages) {
+            throw new InvalidOrderException();
         }
-        if (menus.contains(MAIN_COURSE)) {
-            return;
-        }
-        if (menus.contains(DESSERT)) {
-            return;
-        }
-
-        throw new InvalidOrderException();
     }
 
     /**
@@ -62,4 +52,5 @@ public class OrderValidator {
             throw new InvalidOrderException();
         }
     }
+
 }

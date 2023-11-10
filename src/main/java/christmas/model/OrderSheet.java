@@ -6,11 +6,11 @@ import static christmas.model.Separator.DASH;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderList {
+public class OrderSheet {
 
     private final Map<RestaurantMenu, OrderQuantity> orders;
 
-    public OrderList(String inOrder) {
+    public OrderSheet(String inOrder) {
         Map<RestaurantMenu, OrderQuantity> orders = conversionOrders(inOrder);
 
         this.orders = orders;

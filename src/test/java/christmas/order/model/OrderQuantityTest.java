@@ -1,5 +1,4 @@
-package christmas.model;
-
+package christmas.order.model;
 
 import static christmas.utils.TestUtil.ERROR_PREFACE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,5 +46,5 @@ class OrderQuantityTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_PREFACE);
     }
-    
+
 }

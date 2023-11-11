@@ -4,6 +4,7 @@ import christmas.menu.model.RestaurantMenu;
 import christmas.order.util.OrderParser;
 import christmas.order.util.OrderValidator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class OrderSheet {
 
@@ -15,6 +16,17 @@ public class OrderSheet {
     public OrderSheet(String inOrder) {
         this.orders = OrderParser.parse(inOrder);
         OrderValidator.validateOrder(this.orders);
+    }
+
+    public int getOrderPrice() {
+        int price = 0;
+
+        for (Entry<RestaurantMenu, OrderQuantity> order :
+                orders.entrySet()) {
+            price += order.getKey().getPrice() * order.getValue().getQuantity();
+        }
+
+        return price;
     }
 
 }

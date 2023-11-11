@@ -2,6 +2,7 @@ package christmas;
 
 import christmas.order.OrderController;
 import christmas.order.model.OrderSheet;
+import christmas.view.OutputView;
 
 public class Running {
 
@@ -13,5 +14,7 @@ public class Running {
 
     public void run() {
         OrderSheet orderSheet = orderController.readOrder();
+        OutputView.printOrderPrice(orderSheet.getOrderPrice());
     }
+
 }

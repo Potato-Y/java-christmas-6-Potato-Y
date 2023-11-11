@@ -8,4 +8,9 @@ public class OutputView {
         PrintUtil.println(e.getMessage());
     }
 
+    public static void printOrderPrice(int orderPrice) {
+        PrintUtil.firstPrint("<할인 전 총주문 금액>");
+        PrintUtil.printlnWon(orderPrice);
+    }
+
 }

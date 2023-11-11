@@ -1,10 +1,12 @@
 package christmas.order.model;
 
 import static christmas.utils.TestUtil.ERROR_PREFACE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,4 +29,11 @@ class OrderSheetTest {
                 .hasMessageContaining(ERROR_PREFACE);
     }
 
+    @Test
+    void getOrderPrice() {
+        OrderSheet orderSheet = new OrderSheet("타파스-1,레드와인-1");
+
+        assertThat(orderSheet.getOrderPrice())
+                .isEqualTo(65_500);
+    }
 }

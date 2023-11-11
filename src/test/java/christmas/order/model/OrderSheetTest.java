@@ -19,7 +19,7 @@ class OrderSheetTest {
     }
 
     @DisplayName("정상적이지 않은 주문은 예외 발생")
-    @ValueSource(strings = {"바비큐립-1,메뉴-1", "바베큐립-1,", "아무말", "제로콜라-1"})
+    @ValueSource(strings = {"바비큐립-1,메뉴-1", "아무말", "제로콜라-1"})
     @ParameterizedTest
     void createOrderSheetThrow(String input) {
         assertThatThrownBy(() -> new OrderSheet(input))

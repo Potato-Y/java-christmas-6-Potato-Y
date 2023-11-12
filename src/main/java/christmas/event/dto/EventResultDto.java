@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class EventResultDto {
 
-    Map<RestaurantMenu, Quantity> giveawayEvent;
+    private Map<RestaurantMenu, Quantity> giveawayEvent;
 
     public void setGiveawayMenu(Map<RestaurantMenu, Quantity> giveawayEvent) {
         this.giveawayEvent = giveawayEvent;

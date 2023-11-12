@@ -24,6 +24,7 @@ public class Running {
 
         EventResultDto dto = eventController.calculateEvent(orderSheet, dayOfMonth);
 
+        OutputView.printDiscountResult(dto);
     }
 
 }

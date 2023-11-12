@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.badge.model.EventBadge;
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
@@ -28,6 +29,7 @@ public class OutputView {
         printDiscount(dto.getDiscount(), dto.getGiveawayMenu());
         printTotalBenefits(dto.getGiveawayMenu(), dto.getDiscount());
         printEstimatedPrice(orderSheet, dto.getDiscount());
+        printBadge(dto.getEventBadge());
     }
 
     public static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
@@ -99,6 +101,12 @@ public class OutputView {
         }
 
         PrintUtil.printlnWon(price);
+    }
+
+    private static void printBadge(EventBadge eventBadge) {
+        PrintUtil.firstPrint("<12월 이벤트 배지>");
+
+        PrintUtil.println(eventBadge.getName());
     }
 
 }

@@ -5,7 +5,7 @@ import static christmas.order.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
 import christmas.exception.InvalidOrderException;
 import christmas.menu.model.MenuCategory;
 import christmas.menu.model.RestaurantMenu;
-import christmas.order.model.OrderQuantity;
+import christmas.order.model.Quantity;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -16,7 +16,7 @@ public class OrderValidator {
      *
      * @param orders
      */
-    public static void validateOrder(Map<RestaurantMenu, OrderQuantity> orders) {
+    public static void validateOrder(Map<RestaurantMenu, Quantity> orders) {
         validateBeverage(orders);
         validateTotalQuantity(orders);
     }
@@ -26,7 +26,7 @@ public class OrderValidator {
      *
      * @param orders 주문 내용
      */
-    private static void validateBeverage(Map<RestaurantMenu, OrderQuantity> orders) {
+    private static void validateBeverage(Map<RestaurantMenu, Quantity> orders) {
         boolean onlyBeverages = orders.keySet().stream()
                 .allMatch(menu -> menu.getCategory() == MenuCategory.BEVERAGE);
 
@@ -40,10 +40,10 @@ public class OrderValidator {
      *
      * @param orders 주문 내용
      */
-    private static void validateTotalQuantity(Map<RestaurantMenu, OrderQuantity> orders) {
+    private static void validateTotalQuantity(Map<RestaurantMenu, Quantity> orders) {
         int quantity = 0;
 
-        for (Entry<RestaurantMenu, OrderQuantity> order :
+        for (Entry<RestaurantMenu, Quantity> order :
                 orders.entrySet()) {
             quantity += order.getValue().getQuantity();
         }

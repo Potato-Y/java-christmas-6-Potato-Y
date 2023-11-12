@@ -11,7 +11,7 @@ public class OrderSheet {
     public static final int MINIMUM_ORDER_QUANTITY = 1;
     public static final int MAXIMUM_ORDER_QUANTITY = 20;
 
-    private final Map<RestaurantMenu, OrderQuantity> orders;
+    private final Map<RestaurantMenu, Quantity> orders;
 
     public OrderSheet(String inOrder) {
         this.orders = OrderParser.parse(inOrder);
@@ -21,7 +21,7 @@ public class OrderSheet {
     public int getOrderPrice() {
         int price = 0;
 
-        for (Entry<RestaurantMenu, OrderQuantity> order :
+        for (Entry<RestaurantMenu, Quantity> order :
                 orders.entrySet()) {
             price += order.getKey().getPrice() * order.getValue().getQuantity();
         }

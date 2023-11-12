@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.menu.model.RestaurantMenu;
-import christmas.order.model.OrderQuantity;
+import christmas.order.model.Quantity;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class OrderParserTest {
     @Test
     void parseSuccess() {
         String userOrder = "양송이수프-1,해산물파스타-2,초코케이크-1,제로콜라-3";
-        Map<RestaurantMenu, OrderQuantity> order = OrderParser.parse(userOrder);
+        Map<RestaurantMenu, Quantity> order = OrderParser.parse(userOrder);
 
         assertThat(order.containsKey(RestaurantMenu.BUTTON_MUSHROOM_SOUP)).isTrue();
         assertThat(order.get(RestaurantMenu.BUTTON_MUSHROOM_SOUP).getQuantity()).isEqualTo(1);

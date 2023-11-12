@@ -5,12 +5,12 @@ import static christmas.order.model.OrderSheet.MINIMUM_ORDER_QUANTITY;
 
 import christmas.exception.InvalidOrderException;
 
-public class OrderQuantity {
+public class Quantity {
 
 
     private final int quantity;
 
-    public OrderQuantity(String inQuantity) {
+    public Quantity(String inQuantity) {
         int quantity = convertToInteger(inQuantity);
         validate(quantity);
 

@@ -2,7 +2,7 @@ package christmas.order.util;
 
 import christmas.exception.InvalidOrderException;
 import christmas.menu.model.RestaurantMenu;
-import christmas.order.model.OrderQuantity;
+import christmas.order.model.Quantity;
 import christmas.util.Separator;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,15 +15,15 @@ public class OrderParser {
      * @param inOrder 메뉴명1-2,메뉴2-1, ...
      * @return Map<RestaurantMenu, OrderQuantity>
      */
-    public static Map<RestaurantMenu, OrderQuantity> parse(String inOrder) {
-        Map<RestaurantMenu, OrderQuantity> totalOrder = new HashMap<>();
+    public static Map<RestaurantMenu, Quantity> parse(String inOrder) {
+        Map<RestaurantMenu, Quantity> totalOrder = new HashMap<>();
 
         String[] orders = inOrder.split(Separator.COMMA.toString()); // ,기준으로 자름. 메뉴명-수량
         for (String order :
                 orders) {
             String[] dashSeparation = order.split(Separator.DASH.toString()); // [메뉴명, 수량]
             RestaurantMenu menu = RestaurantMenu.find(dashSeparation[0]); // 메뉴
-            OrderQuantity quantity = new OrderQuantity(dashSeparation[1]); // 수량
+            Quantity quantity = new Quantity(dashSeparation[1]); // 수량
 
             totalOrder.put(menu, quantity);
         }

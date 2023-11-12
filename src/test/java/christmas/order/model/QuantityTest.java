@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class OrderQuantityTest {
+class QuantityTest {
 
     @DisplayName("수량이 저장된다.")
     @Test
@@ -18,7 +18,7 @@ class OrderQuantityTest {
         final String quantity = "10";
 
         // when
-        OrderQuantity orderQuantity = new OrderQuantity(quantity);
+        Quantity orderQuantity = new Quantity(quantity);
 
         // then
         assertThat(orderQuantity.getQuantity())
@@ -29,7 +29,7 @@ class OrderQuantityTest {
     @ValueSource(strings = {"0", "-10", "21"})
     @ParameterizedTest
     void createQuantityThrow(String input) {
-        assertThatThrownBy(() -> new OrderQuantity(input))
+        assertThatThrownBy(() -> new Quantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_PREFACE);
     }

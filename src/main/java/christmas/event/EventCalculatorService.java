@@ -2,6 +2,7 @@ package christmas.event;
 
 import static christmas.event.model.DiscountEvent.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.event.model.DiscountEvent.WEEKDAY_DISCOUNT;
+import static christmas.event.model.DiscountEvent.WEEKEND_DISCOUNT;
 import static christmas.event.model.Week.FRIDAY;
 import static christmas.event.model.Week.SATURDAY;
 import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
@@ -75,12 +76,20 @@ public class EventCalculatorService {
     private void runDayOfWeekDiscount(OrderSheet orderSheet, DayOfMonth day) {
         // 주말 할인
         if (day.getDayOfWeek() == FRIDAY || day.getDayOfWeek() == SATURDAY) {
-            // todo 주말 할인
+            weekendDiscount(orderSheet);
             return;
         }
 
         // 평일 할인
         weekdayDiscount(orderSheet);
+    }
+
+    private void weekendDiscount(OrderSheet orderSheet) {
+        int count = orderSheet.getCountToMenuCategory(MenuCategory.MAIN_COURSE);
+
+        int price = WEEKEND_DISCOUNT.getUnit() * count;
+
+        dto.addDiscount(WEEKEND_DISCOUNT, price);
     }
 
     private void weekdayDiscount(OrderSheet orderSheet) {

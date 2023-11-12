@@ -1,5 +1,6 @@
 package christmas.event;
 
+import static christmas.event.model.DiscountEvent.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
 
 import christmas.event.dto.EventResultDto;
@@ -14,6 +15,7 @@ public class EventCalculatorService {
 
     private static final int MINIMUM_ORDER_AMOUNT = 10_000;
     private static final int MINIMUM_POINTS_FOR_EVENT = 120_000;
+    private static final int CHRISTMAS_DATE = 25;
 
     private EventResultDto dto;
 
@@ -24,6 +26,7 @@ public class EventCalculatorService {
         }
         this.dto = new EventResultDto();
         runGiveawayEvent(orderSheet); // 증정 검사
+        runChristmasDDayDiscount(day); // 크리스마스 디데이 할인
 
         return dto;
     }
@@ -51,6 +54,19 @@ public class EventCalculatorService {
 
             dto.setGiveawayMenu(giveaway);
         }
+    }
+
+    private void runChristmasDDayDiscount(DayOfMonth day) {
+        if (day.getDay() > CHRISTMAS_DATE) { // 크리스마스가 지났다면 끝낸다.
+            return;
+        }
+
+        final int unit = 100;
+        int price = 1000;
+
+        price += unit * (day.getDay() - 1);
+
+        dto.addDiscount(CHRISTMAS_D_DAY_DISCOUNT, price);
     }
 
 }

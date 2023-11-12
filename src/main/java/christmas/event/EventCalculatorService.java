@@ -105,7 +105,7 @@ public class EventCalculatorService {
 
     private void runSpecialDiscount(DayOfMonth day) {
         if (SpecialDiscountDate.contains(day.getDay())) {
-            dto.addDiscount(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getUnit());
+            dto.addDiscount(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getStartDiscount());
         }
     }
 

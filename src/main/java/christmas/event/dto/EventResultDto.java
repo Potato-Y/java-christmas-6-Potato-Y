@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class EventResultDto {
 
-    private Map<RestaurantMenu, Quantity> giveawayEvent;
-
     private final Map<DiscountEvent, Integer> discount;
+
+    private Map<RestaurantMenu, Quantity> giveawayEvent;
 
     public EventResultDto() {
         discount = new HashMap<>();

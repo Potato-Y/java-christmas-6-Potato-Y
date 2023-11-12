@@ -12,15 +12,29 @@ import java.util.Map;
 
 public class EventCalculatorService {
 
+    private static final int MINIMUM_ORDER_AMOUNT = 10_000;
     private static final int MINIMUM_POINTS_FOR_EVENT = 120_000;
 
     private EventResultDto dto;
 
     public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth day) {
+        if (!isEventTarget(orderSheet)) {
+            return dto;
+        }
         this.dto = new EventResultDto();
         runGiveawayEvent(orderSheet); // 증정 검사
 
         return dto;
+    }
+
+    /**
+     * 이벤트 대상인지 확인
+     *
+     * @param orderSheet
+     * @return
+     */
+    private boolean isEventTarget(OrderSheet orderSheet) {
+        return orderSheet.getOrderPrice() > MINIMUM_ORDER_AMOUNT;
     }
 
     /**

@@ -1,10 +1,14 @@
 package christmas.event;
 
 import static christmas.event.model.DiscountEvent.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.event.model.DiscountEvent.WEEKDAY_DISCOUNT;
+import static christmas.event.model.Week.FRIDAY;
+import static christmas.event.model.Week.SATURDAY;
 import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
 
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
+import christmas.menu.model.MenuCategory;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
@@ -27,6 +31,7 @@ public class EventCalculatorService {
         this.dto = new EventResultDto();
         runGiveawayEvent(orderSheet); // 증정 검사
         runChristmasDDayDiscount(day); // 크리스마스 디데이 할인
+        runDayOfWeekDiscount(orderSheet, day);
 
         return dto;
     }
@@ -67,6 +72,25 @@ public class EventCalculatorService {
         price += unit * (day.getDay() - 1);
 
         dto.addDiscount(CHRISTMAS_D_DAY_DISCOUNT, price);
+    }
+
+    private void runDayOfWeekDiscount(OrderSheet orderSheet, DayOfMonth day) {
+        // 주말 할인
+        if (day.getDayOfWeek() == FRIDAY || day.getDayOfWeek() == SATURDAY) {
+            // todo 주말 할인
+            return;
+        }
+
+        // 평일 할인
+        weekdayDiscount(orderSheet);
+    }
+
+    private void weekdayDiscount(OrderSheet orderSheet) {
+        int count = orderSheet.getCountToMenuCategory(MenuCategory.DESSERT);
+        final int unit = 2_023;
+        int price = unit * count;
+
+        dto.addDiscount(WEEKDAY_DISCOUNT, price);
     }
 
 }

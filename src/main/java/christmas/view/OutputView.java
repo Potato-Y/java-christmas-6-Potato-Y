@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.event.dto.EventResultDto;
+import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.Quantity;
 import christmas.view.util.PrintUtil;
@@ -22,6 +23,7 @@ public class OutputView {
 
     public static void printDiscountResult(EventResultDto dto) {
         printGiveaway(dto.getGiveawayMenu());
+        printDiscount(dto.getDiscount(), dto.getGiveawayMenu());
     }
 
     public static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
@@ -36,6 +38,37 @@ public class OutputView {
                 giveaway.entrySet()) {
             String message = String.format("%s %d개", item.getKey().getName(), item.getValue().getQuantity());
             PrintUtil.println(message);
+        }
+    }
+
+    public static void printGiveawayDiscount(Map<RestaurantMenu, Quantity> giveaway) {
+        if (giveaway.isEmpty()) {
+            return;
+        }
+
+        int discount = 0;
+        for (Entry<RestaurantMenu, Quantity> item :
+                giveaway.entrySet()) {
+            discount += (item.getKey().getPrice() * item.getValue().getQuantity());
+        }
+
+        PrintUtil.print("증정 이벤트: -");
+        PrintUtil.printlnWon(discount);
+    }
+
+    public static void printDiscount(Map<DiscountEvent, Integer> discount, Map<RestaurantMenu, Quantity> giveaway) {
+        PrintUtil.firstPrint("<혜택 내역>");
+
+        if (discount.isEmpty() && giveaway.isEmpty()) {
+            PrintUtil.println(NONE);
+            return;
+        }
+
+        printGiveawayDiscount(giveaway);
+        for (Entry<DiscountEvent, Integer> item :
+                discount.entrySet()) {
+            PrintUtil.print(item.getKey().getName() + ": -");
+            PrintUtil.printlnWon(item.getValue());
         }
     }
 

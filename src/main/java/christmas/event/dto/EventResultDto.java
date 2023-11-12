@@ -1,5 +1,6 @@
 package christmas.event.dto;
 
+import christmas.badge.model.EventBadge;
 import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.Quantity;
@@ -11,6 +12,7 @@ public class EventResultDto {
     private final Map<DiscountEvent, Integer> discount;
 
     private Map<RestaurantMenu, Quantity> giveawayEvent;
+    private EventBadge eventBadge;
 
     public EventResultDto() {
         discount = new HashMap<>();
@@ -31,4 +33,19 @@ public class EventResultDto {
     public Map<DiscountEvent, Integer> getDiscount() {
         return discount;
     }
+
+    public int getTotalDiscountAmount() {
+        return discount.values().stream()
+                .mapToInt(discountAmount -> discountAmount)
+                .sum();
+    }
+
+    public void setEventBadge(EventBadge eventBadge) {
+        this.eventBadge = eventBadge;
+    }
+
+    public EventBadge getEventBadge() {
+        return eventBadge;
+    }
+
 }

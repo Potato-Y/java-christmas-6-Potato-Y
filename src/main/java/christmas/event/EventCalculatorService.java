@@ -8,6 +8,7 @@ import static christmas.event.model.Week.FRIDAY;
 import static christmas.event.model.Week.SATURDAY;
 import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
 
+import christmas.badge.model.EventBadge;
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
 import christmas.event.model.SpecialDiscountDate;
@@ -36,6 +37,7 @@ public class EventCalculatorService {
         runChristmasDDayDiscount(day); // 크리스마스 디데이 할인
         runDayOfWeekDiscount(orderSheet, day);
         runSpecialDiscount(day);
+        runBadgeGrant();
 
         return dto;
     }
@@ -107,6 +109,11 @@ public class EventCalculatorService {
         if (SpecialDiscountDate.contains(day.getDay())) {
             dto.addDiscount(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getStartDiscount());
         }
+    }
+
+    private void runBadgeGrant() {
+        EventBadge badge = EventBadge.find(dto.getTotalDiscountAmount());
+        dto.setEventBadge(badge);
     }
 
 }

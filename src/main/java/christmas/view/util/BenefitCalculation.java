@@ -23,4 +23,11 @@ public class BenefitCalculation {
 
         return totalDiscount;
     }
+
+
+    public static int calculateDiscount(Map<DiscountEvent, Integer> discount) {
+        return discount.entrySet().stream()
+                .mapToInt(item -> item.getValue())
+                .sum();
+    }
 }

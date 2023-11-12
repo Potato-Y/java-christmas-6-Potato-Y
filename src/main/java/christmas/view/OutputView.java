@@ -3,6 +3,7 @@ package christmas.view;
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
+import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
 import christmas.view.util.BenefitCalculation;
 import christmas.view.util.PrintUtil;
@@ -22,10 +23,11 @@ public class OutputView {
         PrintUtil.printlnWon(orderPrice);
     }
 
-    public static void printDiscountResult(EventResultDto dto) {
+    public static void printDiscountResult(OrderSheet orderSheet, EventResultDto dto) {
         printGiveaway(dto.getGiveawayMenu());
         printDiscount(dto.getDiscount(), dto.getGiveawayMenu());
         printTotalBenefits(dto.getGiveawayMenu(), dto.getDiscount());
+        printEstimatedPrice(orderSheet, dto.getDiscount());
     }
 
     public static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
@@ -86,6 +88,17 @@ public class OutputView {
 
         PrintUtil.print("-");
         PrintUtil.printlnWon(totalDiscount);
+    }
+
+    public static void printEstimatedPrice(OrderSheet orderSheet, Map<DiscountEvent, Integer> discounts) {
+        PrintUtil.firstPrint("<할인 후 예상 결제 금액>");
+
+        int price = orderSheet.getOrderPrice() - BenefitCalculation.calculateDiscount(discounts);
+        if (price <= 0) {
+            PrintUtil.printlnWon(0);
+        }
+
+        PrintUtil.printlnWon(price);
     }
 
 }

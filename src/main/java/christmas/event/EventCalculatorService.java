@@ -94,7 +94,9 @@ public class EventCalculatorService {
 
         int price = WEEKEND_DISCOUNT.getUnit() * count;
 
-        dto.addDiscount(WEEKEND_DISCOUNT, price);
+        if (price != 0) {
+            dto.addDiscount(WEEKEND_DISCOUNT, price);
+        }
     }
 
     private void weekdayDiscount(OrderSheet orderSheet) {
@@ -102,7 +104,9 @@ public class EventCalculatorService {
 
         int price = WEEKDAY_DISCOUNT.getUnit() * count;
 
-        dto.addDiscount(WEEKDAY_DISCOUNT, price);
+        if (price != 0) {
+            dto.addDiscount(WEEKDAY_DISCOUNT, price);
+        }
     }
 
     private void runSpecialDiscount(DayOfMonth day) {

@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.event.EventController;
+import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
 import christmas.order.OrderController;
 import christmas.order.model.OrderSheet;
@@ -9,17 +10,20 @@ import christmas.view.OutputView;
 public class Running {
 
     OrderController orderController;
-    EventController dayController;
+    EventController eventController;
 
     public Running() {
         this.orderController = new OrderController();
-        this.dayController = new EventController();
+        this.eventController = new EventController();
     }
 
     public void run() {
-        DayOfMonth dayOfMonth = dayController.readDayOfMonth();
+        DayOfMonth dayOfMonth = eventController.readDayOfMonth();
         OrderSheet orderSheet = orderController.readOrder();
         OutputView.printOrderPrice(orderSheet.getOrderPrice());
+
+        EventResultDto dto = eventController.calculateEvent(orderSheet, dayOfMonth);
+
     }
 
 }

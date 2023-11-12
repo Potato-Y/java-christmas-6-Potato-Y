@@ -1,6 +1,7 @@
 package christmas.event;
 
 import static christmas.event.model.DiscountEvent.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.event.model.DiscountEvent.SPECIAL_DISCOUNT;
 import static christmas.event.model.DiscountEvent.WEEKDAY_DISCOUNT;
 import static christmas.event.model.DiscountEvent.WEEKEND_DISCOUNT;
 import static christmas.event.model.Week.FRIDAY;
@@ -9,6 +10,7 @@ import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
 
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
+import christmas.event.model.SpecialDiscountDate;
 import christmas.menu.model.MenuCategory;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
@@ -33,6 +35,7 @@ public class EventCalculatorService {
         runGiveawayEvent(orderSheet); // 증정 검사
         runChristmasDDayDiscount(day); // 크리스마스 디데이 할인
         runDayOfWeekDiscount(orderSheet, day);
+        runSpecialDiscount(day);
 
         return dto;
     }
@@ -98,6 +101,12 @@ public class EventCalculatorService {
         int price = WEEKDAY_DISCOUNT.getUnit() * count;
 
         dto.addDiscount(WEEKDAY_DISCOUNT, price);
+    }
+
+    private void runSpecialDiscount(DayOfMonth day) {
+        if (SpecialDiscountDate.contains(day.getDay())) {
+            dto.addDiscount(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getUnit());
+        }
     }
 
 }

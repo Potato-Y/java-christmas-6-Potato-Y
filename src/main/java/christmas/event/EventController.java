@@ -31,6 +31,6 @@ public class EventController {
     }
 
     public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth day) {
-        return new EventCalculatorService().calculateEvent(orderSheet, day);
+        return calculatorService.calculateEvent(orderSheet, day);
     }
 }

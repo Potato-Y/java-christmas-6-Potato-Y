@@ -18,6 +18,7 @@ public class EventCalculatorService {
     private EventResultDto dto;
 
     public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth day) {
+        dto = null;
         if (!isEventTarget(orderSheet)) {
             return dto;
         }

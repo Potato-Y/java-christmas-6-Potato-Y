@@ -66,10 +66,8 @@ public class EventCalculatorService {
             return;
         }
 
-        final int unit = 100;
-        int price = 1000;
-
-        price += unit * (day.getDay() - 1);
+        int price = CHRISTMAS_D_DAY_DISCOUNT.getStartDiscount();
+        price += CHRISTMAS_D_DAY_DISCOUNT.getUnit() * (day.getDay() - 1);
 
         dto.addDiscount(CHRISTMAS_D_DAY_DISCOUNT, price);
     }
@@ -87,8 +85,8 @@ public class EventCalculatorService {
 
     private void weekdayDiscount(OrderSheet orderSheet) {
         int count = orderSheet.getCountToMenuCategory(MenuCategory.DESSERT);
-        final int unit = 2_023;
-        int price = unit * count;
+
+        int price = WEEKDAY_DISCOUNT.getUnit() * count;
 
         dto.addDiscount(WEEKDAY_DISCOUNT, price);
     }

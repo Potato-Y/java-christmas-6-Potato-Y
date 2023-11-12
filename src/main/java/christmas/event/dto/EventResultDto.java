@@ -11,15 +11,16 @@ public class EventResultDto {
 
     private final Map<DiscountEvent, Integer> discount;
 
-    private Map<RestaurantMenu, Quantity> giveawayEvent;
+    private final Map<RestaurantMenu, Quantity> giveawayEvent;
     private EventBadge eventBadge;
 
     public EventResultDto() {
         discount = new HashMap<>();
+        giveawayEvent = new HashMap<>();
     }
 
-    public void setGiveawayMenu(Map<RestaurantMenu, Quantity> giveawayEvent) {
-        this.giveawayEvent = giveawayEvent;
+    public void addGiveawayMenu(RestaurantMenu menu, Quantity quantity) {
+        giveawayEvent.put(menu, quantity);
     }
 
     public Map<RestaurantMenu, Quantity> getGiveawayMenu() {

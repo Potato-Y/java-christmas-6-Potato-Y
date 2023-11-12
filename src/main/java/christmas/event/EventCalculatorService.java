@@ -13,11 +13,8 @@ import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
 import christmas.event.model.SpecialDiscountDate;
 import christmas.menu.model.MenuCategory;
-import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EventCalculatorService {
 
@@ -59,11 +56,7 @@ public class EventCalculatorService {
      */
     private void runGiveawayEvent(OrderSheet orderSheet) {
         if (orderSheet.getOrderPrice() > MINIMUM_POINTS_FOR_EVENT) {
-            Map<RestaurantMenu, Quantity> giveaway = new HashMap<>() {{
-                put(CHAMPAGNE, new Quantity("1"));
-            }};
-
-            dto.setGiveawayMenu(giveaway);
+            dto.addGiveawayMenu(CHAMPAGNE, new Quantity("1"));
         }
     }
 

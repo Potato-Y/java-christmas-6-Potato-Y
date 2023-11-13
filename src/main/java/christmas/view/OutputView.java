@@ -20,7 +20,7 @@ public class OutputView {
     }
 
     public static void printOrderSheet(OrderSheet orderSheet) {
-        PrintUtil.firstPrint("<주문 내역>");
+        PrintUtil.firstPrint("<주문 메뉴>");
 
         for (Entry<RestaurantMenu, Quantity> item :
                 orderSheet.getOrders().entrySet()) {

@@ -25,11 +25,11 @@ public class EventCalculatorService {
     private EventResultDto dto;
 
     public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth day) {
-        dto = null;
+        this.dto = new EventResultDto();
         if (!isEventTarget(orderSheet)) {
             return dto;
         }
-        this.dto = new EventResultDto();
+
         runGiveawayEvent(orderSheet); // 증정 검사
         runChristmasDDayDiscount(day); // 크리스마스 디데이 할인
         runDayOfWeekDiscount(orderSheet, day);

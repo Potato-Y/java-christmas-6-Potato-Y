@@ -17,6 +17,7 @@ public class EventResultDto {
     public EventResultDto() {
         discount = new HashMap<>();
         giveawayEvent = new HashMap<>();
+        eventBadge = EventBadge.NONE;
     }
 
     public void addGiveawayMenu(RestaurantMenu menu, Quantity quantity) {

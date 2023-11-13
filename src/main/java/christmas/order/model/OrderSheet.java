@@ -45,4 +45,8 @@ public class OrderSheet {
         return count;
     }
 
+    public Map<RestaurantMenu, Quantity> getOrders() {
+        return orders;
+    }
+
 }

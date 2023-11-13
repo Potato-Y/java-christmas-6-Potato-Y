@@ -19,6 +19,16 @@ public class OutputView {
         PrintUtil.println(e.getMessage());
     }
 
+    public static void printOrderSheet(OrderSheet orderSheet) {
+        PrintUtil.firstPrint("<주문 내역>");
+
+        for (Entry<RestaurantMenu, Quantity> item :
+                orderSheet.getOrders().entrySet()) {
+            String message = String.format("%s %d개", item.getKey().getName(), item.getValue().getQuantity());
+            PrintUtil.println(message);
+        }
+    }
+
     public static void printOrderPrice(int orderPrice) {
         PrintUtil.firstPrint("<할인 전 총주문 금액>");
         PrintUtil.printlnWon(orderPrice);

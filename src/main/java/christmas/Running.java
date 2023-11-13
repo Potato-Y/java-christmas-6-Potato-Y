@@ -20,6 +20,7 @@ public class Running {
     public void run() {
         DayOfMonth dayOfMonth = eventController.readDayOfMonth();
         OrderSheet orderSheet = orderController.readOrder();
+        OutputView.printOrderSheet(orderSheet);
         OutputView.printOrderPrice(orderSheet.getOrderPrice());
 
         EventResultDto dto = eventController.calculateEvent(orderSheet, dayOfMonth);

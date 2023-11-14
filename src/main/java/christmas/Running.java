@@ -29,6 +29,8 @@ public class Running {
         EventResultDto dto = eventController.calculateEvent(orderSheet, dayOfMonth);
 
         OutputView.printDiscountResult(orderSheet, dto);
+
+        // TODO: DTO의 데이터를 통해 DB에 배지 저장하여 추후 활용
     }
 
 }

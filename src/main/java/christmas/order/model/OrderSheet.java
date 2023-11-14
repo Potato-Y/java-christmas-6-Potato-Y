@@ -9,9 +9,6 @@ import java.util.Map.Entry;
 
 public class OrderSheet {
 
-    public static final int MINIMUM_ORDER_QUANTITY = 1;
-    public static final int MAXIMUM_ORDER_QUANTITY = 20;
-
     private final Map<RestaurantMenu, Quantity> orders;
 
     public OrderSheet(String inOrder) {

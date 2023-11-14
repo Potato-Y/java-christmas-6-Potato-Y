@@ -1,6 +1,6 @@
 package christmas.order.util;
 
-import static christmas.order.model.OrderSheet.MAXIMUM_ORDER_QUANTITY;
+import static christmas.order.model.OrderSize.MAXIMUM_ORDER_QUANTITY;
 
 import christmas.exception.InvalidOrderException;
 import christmas.menu.model.MenuCategory;

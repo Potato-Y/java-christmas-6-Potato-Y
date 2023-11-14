@@ -1,5 +1,7 @@
 package christmas;
 
+import static christmas.view.OutputView.printPreviewGuide;
+
 import christmas.event.EventController;
 import christmas.event.dto.EventResultDto;
 import christmas.event.model.DayOfMonth;
@@ -20,6 +22,7 @@ public class Running {
     public void run() {
         DayOfMonth dayOfMonth = eventController.readDayOfMonth();
         OrderSheet orderSheet = orderController.readOrder();
+        printPreviewGuide();
         OutputView.printOrderSheet(orderSheet);
         OutputView.printOrderPrice(orderSheet.getOrderPrice());
 

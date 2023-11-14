@@ -36,6 +36,11 @@ public class PrintUtil {
         System.out.println(text);
     }
 
+    public static void printlnMinusWon(int money) {
+        System.out.print("-");
+        printlnWon(money);
+    }
+
     /**
      * println("이름 n개")
      *

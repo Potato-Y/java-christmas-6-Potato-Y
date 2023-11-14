@@ -6,7 +6,6 @@ import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
-import christmas.util.Separator;
 import christmas.view.util.BenefitCalculation;
 import christmas.view.util.PrintUtil;
 import java.util.Map;
@@ -67,8 +66,8 @@ public class OutputView {
             discount += (item.getKey().getPrice() * item.getValue().getQuantity());
         }
 
-        PrintUtil.print("증정 이벤트: " + Separator.DASH);
-        PrintUtil.printlnWon(discount);
+        PrintUtil.print("증정 이벤트: ");
+        PrintUtil.printlnMinusWon(discount);
     }
 
     public static void printDiscount(Map<DiscountEvent, Integer> discount, Map<RestaurantMenu, Quantity> giveaway) {
@@ -82,8 +81,8 @@ public class OutputView {
         printGiveawayDiscount(giveaway);
         for (Entry<DiscountEvent, Integer> item :
                 discount.entrySet()) {
-            PrintUtil.print(item.getKey().getName() + ": " + Separator.DASH);
-            PrintUtil.printlnWon(item.getValue());
+            PrintUtil.print(item.getKey().getName() + ": ");
+            PrintUtil.printlnMinusWon(item.getValue());
         }
     }
 
@@ -97,8 +96,7 @@ public class OutputView {
             return;
         }
 
-        PrintUtil.print(Separator.DASH.toString());
-        PrintUtil.printlnWon(totalDiscount);
+        PrintUtil.printlnMinusWon(totalDiscount);
     }
 
     public static void printEstimatedPrice(OrderSheet orderSheet, Map<DiscountEvent, Integer> discounts) {

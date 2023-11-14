@@ -10,12 +10,6 @@ import christmas.view.OutputView;
 
 public class EventController {
 
-    private final EventCalculatorService calculatorService;
-
-    public EventController() {
-        this.calculatorService = new EventCalculatorService();
-    }
-
     public DayOfMonth readDayOfMonth() {
         String input = InputView.readDayOfMonth();
 
@@ -30,7 +24,8 @@ public class EventController {
         }
     }
 
-    public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth day) {
-        return calculatorService.calculateEvent(orderSheet, day);
+    public EventResultDto calculateEvent(OrderSheet orderSheet, DayOfMonth dayOfMonth) {
+        return EventResultFilter.eventResult(orderSheet, dayOfMonth);
     }
+
 }

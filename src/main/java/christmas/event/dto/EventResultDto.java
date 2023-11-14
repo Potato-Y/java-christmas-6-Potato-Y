@@ -20,16 +20,20 @@ public class EventResultDto {
         eventBadge = EventBadge.NONE;
     }
 
-    public void addGiveawayMenu(RestaurantMenu menu, Quantity quantity) {
-        giveawayEvent.put(menu, quantity);
+    public void addGiveawayMenu(GiveawayDto dto) {
+        if (dto != null) {
+            giveawayEvent.put(dto.getRestaurantMenu(), dto.getQuantity());
+        }
     }
 
     public Map<RestaurantMenu, Quantity> getGiveawayMenu() {
         return giveawayEvent;
     }
 
-    public void addDiscount(DiscountEvent event, int price) {
-        discount.put(event, price);
+    public void addDiscount(DiscountDto dto) {
+        if (dto != null) {
+            discount.put(dto.getDiscountEvent(), dto.getDiscount());
+        }
     }
 
     public Map<DiscountEvent, Integer> getDiscount() {

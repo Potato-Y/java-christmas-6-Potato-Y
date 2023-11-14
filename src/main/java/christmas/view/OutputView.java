@@ -6,6 +6,7 @@ import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
+import christmas.util.Separator;
 import christmas.view.util.BenefitCalculation;
 import christmas.view.util.PrintUtil;
 import java.util.Map;
@@ -20,17 +21,16 @@ public class OutputView {
     }
 
     public static void printOrderSheet(OrderSheet orderSheet) {
-        PrintUtil.firstPrint("<주문 메뉴>");
+        PrintUtil.titlePrint("주문 메뉴");
 
         for (Entry<RestaurantMenu, Quantity> item :
                 orderSheet.getOrders().entrySet()) {
-            String message = String.format("%s %d개", item.getKey().getName(), item.getValue().getQuantity());
-            PrintUtil.println(message);
+            PrintUtil.printlnItemNumber(item.getKey().getName(), item.getValue().getQuantity());
         }
     }
 
     public static void printOrderPrice(int orderPrice) {
-        PrintUtil.firstPrint("<할인 전 총주문 금액>");
+        PrintUtil.titlePrint("할인 전 총주문 금액");
         PrintUtil.printlnWon(orderPrice);
     }
 
@@ -43,7 +43,7 @@ public class OutputView {
     }
 
     public static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
-        PrintUtil.firstPrint("<증정 메뉴>");
+        PrintUtil.titlePrint("증정 메뉴");
 
         if (giveaway.isEmpty()) {
             PrintUtil.println(NONE);
@@ -52,8 +52,7 @@ public class OutputView {
 
         for (Entry<RestaurantMenu, Quantity> item :
                 giveaway.entrySet()) {
-            String message = String.format("%s %d개", item.getKey().getName(), item.getValue().getQuantity());
-            PrintUtil.println(message);
+            PrintUtil.printlnItemNumber(item.getKey().getName(), item.getValue().getQuantity());
         }
     }
 
@@ -68,12 +67,12 @@ public class OutputView {
             discount += (item.getKey().getPrice() * item.getValue().getQuantity());
         }
 
-        PrintUtil.print("증정 이벤트: -");
+        PrintUtil.print("증정 이벤트: " + Separator.DASH);
         PrintUtil.printlnWon(discount);
     }
 
     public static void printDiscount(Map<DiscountEvent, Integer> discount, Map<RestaurantMenu, Quantity> giveaway) {
-        PrintUtil.firstPrint("<혜택 내역>");
+        PrintUtil.titlePrint("혜택 내역");
 
         if (discount.isEmpty() && giveaway.isEmpty()) {
             PrintUtil.println(NONE);
@@ -83,14 +82,14 @@ public class OutputView {
         printGiveawayDiscount(giveaway);
         for (Entry<DiscountEvent, Integer> item :
                 discount.entrySet()) {
-            PrintUtil.print(item.getKey().getName() + ": -");
+            PrintUtil.print(item.getKey().getName() + ": " + Separator.DASH);
             PrintUtil.printlnWon(item.getValue());
         }
     }
 
     public static void printTotalBenefits(Map<RestaurantMenu, Quantity> giveawayMenu,
                                           Map<DiscountEvent, Integer> discount) {
-        PrintUtil.firstPrint("<총혜택 금액>");
+        PrintUtil.titlePrint("총혜택 금액");
 
         int totalDiscount = BenefitCalculation.calculateTotalBenefits(giveawayMenu, discount);
         if (totalDiscount == 0) {
@@ -98,12 +97,12 @@ public class OutputView {
             return;
         }
 
-        PrintUtil.print("-");
+        PrintUtil.print(Separator.DASH.toString());
         PrintUtil.printlnWon(totalDiscount);
     }
 
     public static void printEstimatedPrice(OrderSheet orderSheet, Map<DiscountEvent, Integer> discounts) {
-        PrintUtil.firstPrint("<할인 후 예상 결제 금액>");
+        PrintUtil.titlePrint("할인 후 예상 결제 금액");
 
         int price = orderSheet.getOrderPrice() - BenefitCalculation.calculateDiscount(discounts);
         if (price <= 0) {
@@ -114,7 +113,7 @@ public class OutputView {
     }
 
     private static void printBadge(EventBadge eventBadge) {
-        PrintUtil.firstPrint("<12월 이벤트 배지>");
+        PrintUtil.titlePrint("12월 이벤트 배지");
 
         PrintUtil.println(eventBadge.getName());
     }

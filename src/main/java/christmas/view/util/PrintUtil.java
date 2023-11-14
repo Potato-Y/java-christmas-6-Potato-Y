@@ -9,6 +9,18 @@ public class PrintUtil {
         System.out.println(text);
     }
 
+    /**
+     * println() and println(<내용>)
+     *
+     * @param text
+     */
+    public static void titlePrint(String text) {
+        String message = "<%s>";
+
+        System.out.println();
+        System.out.printf((message) + "%n", text);
+    }
+
     public static void println(String text) {
         System.out.println(text);
     }
@@ -22,6 +34,18 @@ public class PrintUtil {
 
         String text = format.format(money);
         System.out.println(text);
+    }
+
+    /**
+     * println("이름 n개")
+     *
+     * @param name
+     * @param number
+     */
+    public static void printlnItemNumber(String name, int number) {
+        String message = "%s %d개\n";
+
+        System.out.printf((message), name, number);
     }
 
 }

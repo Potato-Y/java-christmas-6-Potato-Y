@@ -10,6 +10,9 @@ class PrintUtilTest extends NsTest {
 
     private static final String DASH = "-";
 
+    /**
+     * 본 코드는 Windows 운영체제에서 인코딩 문제로 통과하지 못할 수 있음. 설정 변경 필요
+     */
     @DisplayName("한칸 건너뛰고 출력된다.")
     @Test
     void firstPrint() {
@@ -39,6 +42,9 @@ class PrintUtilTest extends NsTest {
         assertThat(output()).isEqualTo("<" + title + ">");
     }
 
+    /**
+     * 본 코드는 Windows 운영체제에서 인코딩 문제로 통과하지 못할 수 있음. 설정 변경 필요
+     */
     @DisplayName("출력 후 줄바꿈이 된다.")
     @Test
     void println() {

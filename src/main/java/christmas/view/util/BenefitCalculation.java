@@ -26,8 +26,8 @@ public class BenefitCalculation {
 
 
     public static int calculateDiscount(Map<DiscountEvent, Integer> discount) {
-        return discount.entrySet().stream()
-                .mapToInt(item -> item.getValue())
+        return discount.values().stream()
+                .mapToInt(integer -> integer)
                 .sum();
     }
 }

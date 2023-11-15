@@ -7,7 +7,7 @@ public enum TestOrderSet {
     ORDER_UNDER_GIVEAWAY("해산물파스타-1", 0, 1, 0, 0),
     ORDER_MAIN_2_DESSERT_3("티본스테이크-2,아이스크림-3", 0, 2, 3, 0),
     ORDER_APPETIZER_1("시저샐러드-1", 1, 0, 0, 0),
-    ORDER_FULL("양송이수프-2,티본스테이크-14,초코케이크-2,제로콜라-2", 2, 14, 2, 2);
+    ORDER_FULL_DESERT("양송이수프-2,티본스테이크-2,초코케이크-14,제로콜라-2", 2, 2, 14, 2);
 
     private final String order;
     private final int appetizerCount;

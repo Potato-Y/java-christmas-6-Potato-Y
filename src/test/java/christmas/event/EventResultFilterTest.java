@@ -7,7 +7,7 @@ import static christmas.event.model.DiscountEvent.SPECIAL_DISCOUNT;
 import static christmas.event.model.DiscountEvent.WEEKDAY_DISCOUNT;
 import static christmas.event.model.DiscountEvent.WEEKEND_DISCOUNT;
 import static christmas.menu.model.RestaurantMenu.CHAMPAGNE;
-import static christmas.utils.TestOrderSet.ORDER_FULL;
+import static christmas.utils.TestOrderSet.ORDER_FULL_DESERT;
 import static christmas.utils.TestOrderSet.ORDER_NORMAL_TARGET_FALSE;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +23,7 @@ class EventResultFilterTest {
     @Test
     void allEventCalculate() {
         // given
-        OrderSheet orderSheet = new OrderSheet(ORDER_FULL.toString());
+        OrderSheet orderSheet = new OrderSheet(ORDER_FULL_DESERT.toString());
         DayOfMonth day = new DayOfMonth("10");
 
         // when
@@ -32,7 +32,7 @@ class EventResultFilterTest {
         // then
         assertThat(dto.getDiscount().containsKey(CHRISTMAS_D_DAY_DISCOUNT)).isTrue();
         assertThat(dto.getDiscount().containsKey(WEEKDAY_DISCOUNT)).isTrue();
-        assertThat(dto.getDiscount().containsKey(WEEKEND_DISCOUNT)).isTrue();
+        assertThat(dto.getDiscount().containsKey(WEEKEND_DISCOUNT)).isFalse();
         assertThat(dto.getDiscount().containsKey(SPECIAL_DISCOUNT)).isTrue();
         assertThat(dto.getGiveawayMenu().containsKey(CHAMPAGNE)).isTrue();
         assertThat(dto.getEventBadge()).isEqualTo(SANTA);

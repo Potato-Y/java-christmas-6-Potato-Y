@@ -16,14 +16,10 @@ public class BenefitCalculation {
                 giveawayMenu.entrySet()) {
             totalDiscount += item.getKey().getPrice() * item.getValue().getQuantity();
         }
-        for (Entry<DiscountEvent, Integer> item :  // 할인액 더하기
-                discount.entrySet()) {
-            totalDiscount += item.getValue();
-        }
+        totalDiscount += calculateDiscount(discount);
 
         return totalDiscount;
     }
-
 
     public static int calculateDiscount(Map<DiscountEvent, Integer> discount) {
         return discount.values().stream()

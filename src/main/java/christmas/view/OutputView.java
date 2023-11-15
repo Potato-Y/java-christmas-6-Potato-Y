@@ -18,8 +18,9 @@ public class OutputView {
         PrintUtil.println(e.getMessage());
     }
 
-    public static void printPreviewGuide() {
-        PrintUtil.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    public static void printPreviewGuide(int day) {
+        String message = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+        PrintUtil.println(String.format(message, day));
     }
 
     public static void printOrderSheet(OrderSheet orderSheet) {

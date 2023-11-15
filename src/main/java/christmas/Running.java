@@ -22,7 +22,7 @@ public class Running {
     public void run() {
         DayOfMonth dayOfMonth = eventController.readDayOfMonth();
         OrderSheet orderSheet = orderController.readOrder();
-        printPreviewGuide();
+        printPreviewGuide(dayOfMonth.getDay());
         OutputView.printOrderSheet(orderSheet);
         OutputView.printOrderPrice(orderSheet.getOrderPrice());
 

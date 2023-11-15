@@ -7,6 +7,8 @@ import christmas.event.dto.EventResultDto;
 import christmas.exception.InvalidDateException;
 import christmas.order.model.OrderSheet;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OutputViewTest extends NsTest {
 
@@ -36,6 +38,14 @@ class OutputViewTest extends NsTest {
 
         assertThat(output()).contains("<할인 전 총주문 금액>",
                 "10,000원");
+    }
+
+    @ValueSource(ints = {1, 2, 23})
+    @ParameterizedTest
+    void 입력된_날짜가_표시된다(int day) {
+        OutputView.printPreviewGuide(day);
+
+        assertThat(output()).isEqualTo("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
 
     @Test

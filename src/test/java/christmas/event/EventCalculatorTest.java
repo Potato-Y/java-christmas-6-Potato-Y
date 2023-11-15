@@ -188,33 +188,37 @@ class EventCalculatorTest {
 
 
     @DisplayName("가격에 맞춰 배지가 발급된다: 없음")
-    @Test
-    void getNoneBadge() {
-        EventBadge badge = EventCalculator.runBadgeGrant(1_000);
+    @ValueSource(ints = {0, 1_000, 4_900})
+    @ParameterizedTest
+    void getNoneBadge(int input) {
+        EventBadge badge = EventCalculator.runBadgeGrant(input);
 
         assertThat(badge).isEqualTo(EventBadge.NONE);
     }
 
     @DisplayName("가격에 맞춰 배지가 발급된다: 별")
-    @Test
-    void getStarBadge() {
-        EventBadge badge = EventCalculator.runBadgeGrant(6_500);
+    @ValueSource(ints = {5_000, 5_500, 9_900})
+    @ParameterizedTest
+    void getStarBadge(int input) {
+        EventBadge badge = EventCalculator.runBadgeGrant(input);
 
         assertThat(badge).isEqualTo(EventBadge.STAR);
     }
 
     @DisplayName("가격에 맞춰 배지가 발급된다: 트리")
-    @Test
-    void getTreeBadge() {
-        EventBadge badge = EventCalculator.runBadgeGrant(11_000);
+    @ValueSource(ints = {10_000, 11_000, 19_900})
+    @ParameterizedTest
+    void getTreeBadge(int input) {
+        EventBadge badge = EventCalculator.runBadgeGrant(input);
 
         assertThat(badge).isEqualTo(EventBadge.TREE);
     }
 
     @DisplayName("가격에 맞춰 배지가 발급된다: 산타")
-    @Test
-    void getSantaBadge() {
-        EventBadge badge = EventCalculator.runBadgeGrant(21_000);
+    @ValueSource(ints = {20_000, 20_100, 100_000})
+    @ParameterizedTest
+    void getSantaBadge(int input) {
+        EventBadge badge = EventCalculator.runBadgeGrant(input);
 
         assertThat(badge).isEqualTo(EventBadge.SANTA);
     }

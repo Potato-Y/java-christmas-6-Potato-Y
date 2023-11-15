@@ -27,13 +27,13 @@ public enum EventBadge {
     }
 
     public static EventBadge find(int discountAmount) {
-        if (discountAmount > SANTA.getDiscountThreshold()) {
+        if (discountAmount >= SANTA.getDiscountThreshold()) {
             return SANTA;
         }
-        if (discountAmount > TREE.getDiscountThreshold()) {
+        if (discountAmount >= TREE.getDiscountThreshold()) {
             return TREE;
         }
-        if (discountAmount > STAR.getDiscountThreshold()) {
+        if (discountAmount >= STAR.getDiscountThreshold()) {
             return STAR;
         }
 

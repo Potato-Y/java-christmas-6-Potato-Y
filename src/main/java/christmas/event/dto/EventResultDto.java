@@ -6,6 +6,7 @@ import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.Quantity;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class EventResultDto {
 
@@ -44,6 +45,17 @@ public class EventResultDto {
         return discount.values().stream()
                 .mapToInt(discountAmount -> discountAmount)
                 .sum();
+    }
+
+    public int getTotalGiveawayMenuAmount() {
+        int totalAmount = 0;
+
+        for (Entry<RestaurantMenu, Quantity> item : // 증정품 계산
+                giveawayEvent.entrySet()) {
+            totalAmount += item.getKey().getPrice() * item.getValue().getQuantity();
+        }
+
+        return totalAmount;
     }
 
     public void setEventBadge(EventBadge eventBadge) {

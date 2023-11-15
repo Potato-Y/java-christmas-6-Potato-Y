@@ -6,7 +6,6 @@ import christmas.event.model.DiscountEvent;
 import christmas.menu.model.RestaurantMenu;
 import christmas.order.model.OrderSheet;
 import christmas.order.model.Quantity;
-import christmas.view.util.BenefitCalculation;
 import christmas.view.util.PrintUtil;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,7 +39,7 @@ public class OutputView {
     public static void printDiscountResult(OrderSheet orderSheet, EventResultDto dto) {
         printGiveaway(dto.getGiveawayMenu());
         printDiscount(dto.getDiscount(), dto.getGiveawayMenu());
-        printTotalBenefits(dto.getGiveawayMenu(), dto.getTotalDiscountAmount());
+        printTotalBenefits(dto.getTotalGiveawayMenuAmount(), dto.getTotalDiscountAmount());
         printEstimatedPrice(orderSheet, dto.getTotalDiscountAmount());
         printBadge(dto.getEventBadge());
     }
@@ -90,10 +89,10 @@ public class OutputView {
         }
     }
 
-    public static void printTotalBenefits(Map<RestaurantMenu, Quantity> giveawayMenu, int discount) {
+    public static void printTotalBenefits(int giveawayAmount, int discount) {
         PrintUtil.titlePrint("총혜택 금액");
 
-        int totalDiscount = BenefitCalculation.calculateTotalBenefits(giveawayMenu, discount);
+        int totalDiscount = giveawayAmount + discount;
         if (totalDiscount == 0) {
             PrintUtil.printlnWon(totalDiscount);
             return;

@@ -44,7 +44,7 @@ public class OutputView {
         printBadge(dto.getEventBadge());
     }
 
-    public static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
+    private static void printGiveaway(Map<RestaurantMenu, Quantity> giveaway) {
         PrintUtil.titlePrint("증정 메뉴");
 
         if (giveaway.isEmpty()) {
@@ -73,7 +73,7 @@ public class OutputView {
         PrintUtil.printlnMinusWon(discount);
     }
 
-    public static void printDiscount(Map<DiscountEvent, Integer> discount, Map<RestaurantMenu, Quantity> giveaway) {
+    private static void printDiscount(Map<DiscountEvent, Integer> discount, Map<RestaurantMenu, Quantity> giveaway) {
         PrintUtil.titlePrint("혜택 내역");
 
         if (discount.isEmpty() && giveaway.isEmpty()) {
@@ -89,7 +89,7 @@ public class OutputView {
         }
     }
 
-    public static void printTotalBenefits(int giveawayAmount, int discount) {
+    private static void printTotalBenefits(int giveawayAmount, int discount) {
         PrintUtil.titlePrint("총혜택 금액");
 
         int totalDiscount = giveawayAmount + discount;
@@ -101,7 +101,7 @@ public class OutputView {
         PrintUtil.printlnMinusWon(totalDiscount);
     }
 
-    public static void printEstimatedPrice(OrderSheet orderSheet, int totalDiscount) {
+    private static void printEstimatedPrice(OrderSheet orderSheet, int totalDiscount) {
         PrintUtil.titlePrint("할인 후 예상 결제 금액");
 
         int price = orderSheet.getOrderPrice() - totalDiscount;

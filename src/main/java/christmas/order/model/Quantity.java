@@ -7,7 +7,6 @@ import christmas.exception.InvalidOrderException;
 
 public class Quantity {
 
-
     private final int quantity;
 
     public Quantity(String inQuantity) {

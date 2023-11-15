@@ -1,10 +1,14 @@
 package christmas.order.model;
 
+import static christmas.utils.TestOrderSet.ORDER_FULL_DESERT;
+import static christmas.utils.TestOrderSet.ORDER_MAIN_2_DESSERT_3;
+import static christmas.utils.TestOrderSet.ORDER_NORMAL_TARGET_TRUE;
 import static christmas.utils.TestUtil.ERROR_PREFACE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import christmas.menu.model.MenuCategory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,11 +33,40 @@ class OrderSheetTest {
                 .hasMessageContaining(ERROR_PREFACE);
     }
 
+    @DisplayName("주문한 가격의 전체 값을 가져온다.")
     @Test
     void getOrderPrice() {
-        OrderSheet orderSheet = new OrderSheet("타파스-1,레드와인-1");
+        OrderSheet orderSheet = new OrderSheet(ORDER_NORMAL_TARGET_TRUE.toString());
 
         assertThat(orderSheet.getOrderPrice())
-                .isEqualTo(65_500);
+                .isEqualTo(11_500);
     }
+
+    @DisplayName("주문한 주문서에서 특정 카테고리의 주문 수를 가져온다.")
+    @Test
+    void getCountToMenuCategory() {
+        OrderSheet orderSheet = new OrderSheet(ORDER_FULL_DESERT.toString());
+
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.APPETIZER))
+                .isEqualTo(ORDER_FULL_DESERT.getAppetizerCount());
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.MAIN_COURSE))
+                .isEqualTo(ORDER_FULL_DESERT.getMainCount());
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.DESSERT))
+                .isEqualTo(ORDER_FULL_DESERT.getDessertCount());
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.BEVERAGE))
+                .isEqualTo(ORDER_FULL_DESERT.getBeverageCount());
+
+    }
+
+    @DisplayName("주문한 주문서에 특정 카테고리가 없으면 0을 반환한다.")
+    @Test
+    void getCountToMenuCategoryForZero() {
+        OrderSheet orderSheet = new OrderSheet(ORDER_MAIN_2_DESSERT_3.toString());
+
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.APPETIZER))
+                .isEqualTo(0);
+        assertThat(orderSheet.getCountToMenuCategory(MenuCategory.BEVERAGE))
+                .isEqualTo(0);
+    }
+
 }
